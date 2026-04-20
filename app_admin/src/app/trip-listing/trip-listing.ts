@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { TripCard } from '../trip-card/trip-card';
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
+import { AuthenticationService } from '../services/authentication';
 
 @Component({
   selector: 'app-trip-listing',
@@ -20,8 +21,9 @@ export class TripListing implements OnInit {
   message: string = '';
 
   constructor(
-    private tripDataService: TripDataService,
-    private router: Router
+  private tripDataService: TripDataService,
+  private router: Router,
+  private authenticationService: AuthenticationService
   ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -36,6 +38,10 @@ export class TripListing implements OnInit {
     this.router.navigate(['add-trip']);
   }
 
+  public isLoggedIn(): boolean {
+  return this.authenticationService.isLoggedIn();
+  }
+  
   private getStuff(): void {
     this.tripDataService.getTrips()
       .subscribe({
