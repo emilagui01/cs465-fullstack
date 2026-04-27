@@ -29,3 +29,5 @@ Security added another layer of complexity. After implementing JWT authenticatio
 This course helped me better understand how full stack applications are built and how the frontend and backend work together. I gained experience using Angular for building a single-page application and learned how it differs from traditional server-rendered applications. I also improved my understanding of REST APIs, routing, and database integration using MongoDB.
 
 One of the most valuable skills I developed was debugging across multiple layers of an application. I learned how to identify issues in the frontend, backend, and API communication, and how to fix them step by step. Implementing authentication with JWT also gave me practical experience with security concepts that are important in real-world applications.
+
+Overall, this project helped me become more confident in building full stack applications and prepared me for future roles in software development and cybersecurity. The experience of working with the MEAN stack, handling authentication, and managing data flow will be valuable as I continue developing my technical skills and working toward my career goals.
