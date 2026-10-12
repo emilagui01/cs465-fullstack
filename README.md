@@ -1,4 +1,93 @@
-# CS-465 Full Stack Development with MEAN
+# Travlr Getaways: Full Stack MEAN Application (CS-465)
+
+> **This is the original version, built for CS-465 Full Stack Development I at Southern New Hampshire University (March to April 2026).**
+> I later enhanced this project for my CS-499 capstone, adding an Angular route guard, stronger form and database validation, safer error handling, a corrected JWT check and Delete Trip support.
+> See the enhanced version in my **[Capstone ePortfolio](https://emilagui01.github.io/capstone/)**.
+
+Travlr Getaways is a travel booking web application. Customers browse trips on a public website, and staff sign in to an Angular admin app to add and edit trips. Both sides read from the same REST API and MongoDB database.
+
+## Tech stack
+
+| Layer | Technology |
+|---|---|
+| Customer site | Express with Handlebars templates (server-rendered) |
+| Admin app | Angular 21 single-page application, TypeScript |
+| API | Node.js and Express REST API |
+| Database | MongoDB with Mongoose |
+| Security | Passport (local strategy), JSON Web Tokens, hashed passwords |
+| Testing | Postman for API endpoints |
+
+## Project structure
+
+| Folder | Purpose |
+|---|---|
+| `app_server/` | Customer-facing Express site: routes, controllers and Handlebars views |
+| `app_api/` | REST API: routes, controllers, Mongoose models, Passport config, seed script |
+| `app_admin/` | Angular admin app: trip listing, trip card, add and edit trip, login, JWT interceptor |
+| `public/` | Static HTML, CSS and images |
+| `data/trips.json` | Seed data for the trips collection |
+
+## How the project was built, module by module
+
+Each branch is a snapshot of the project at the end of that week's module, so you can see how it grew.
+
+| Branch | What was added |
+|---|---|
+| `module1` | Static Express website |
+| `module2` | Handlebars templates, routes and controllers |
+| `module3` | Trip data loaded from a JSON file |
+| `module4` | MongoDB database, Mongoose model and seed script |
+| `module5` | REST API (`app_api`), with the customer site reading trips from it |
+| `module6` | Angular admin app: trip listing, trip cards, add and edit trip |
+| `module7` | Admin login, navbar, authentication service and JWT interceptor |
+| `module8` | Backend authentication: user model, Passport, JWT-protected routes |
+
+## API endpoints
+
+| Method | Endpoint | Protected | Purpose |
+|---|---|---|---|
+| POST | `/api/register` | No | Create a user account |
+| POST | `/api/login` | No | Sign in and receive a JWT |
+| GET | `/api/trips` | No | List all trips |
+| POST | `/api/trips` | Yes | Add a trip |
+| GET | `/api/trips/:tripCode` | No | Get one trip by code |
+| PUT | `/api/trips/:tripCode` | Yes | Update a trip |
+
+## Running it locally
+
+You need Node.js, the Angular CLI and a local MongoDB server.
+
+1. Create a `.env` file in the project root with a secret for signing tokens:
+   ```
+   JWT_SECRET=your-secret-here
+   ```
+2. Install backend dependencies and seed the database:
+   ```
+   npm install
+   node app_api/models/seed.js
+   ```
+3. Start the backend (customer site and API on http://localhost:3000):
+   ```
+   npm start
+   ```
+4. In a second terminal, start the admin app (http://localhost:4200):
+   ```
+   cd app_admin
+   npm install
+   ng serve
+   ```
+
+## Known limitations (fixed in the capstone)
+
+This is the course version and is kept as it was submitted. These issues were found and fixed in the [enhanced capstone version](https://emilagui01.github.io/capstone/):
+
+* The JWT check sends a 401 for an invalid token but still lets the request continue.
+* Trip controllers have no try/catch, so invalid data can crash the server.
+* Single-trip lookup uses `find()` and returns a list instead of one trip.
+* There is no Delete Trip route.
+* Admin pages are hidden from logged-out users but not route-protected.
+
+## Course reflection
 
 ## Architecture
 ### Compare and contrast the types of frontend development you used in your full stack project, including Express HTML, JavaScript, and the single-page application (SPA). Why did the backend use a NoSQL MongoDB database?
